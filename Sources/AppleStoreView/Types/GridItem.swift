@@ -11,4 +11,5 @@ public struct GridItem: Codable, Identifiable {
     public var id = UUID()
     public var title: String
     public var image: String
+    public var link: String
 }

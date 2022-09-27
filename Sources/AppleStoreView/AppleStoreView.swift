@@ -94,10 +94,12 @@ extension AppleStoreView {
 @available(iOS 15.0, *)
 struct AppleStoreView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
+        NavigationView {
             AppleStoreView(link: "") { link, onDone in
                 onDone(appleStoreList)
             }
+            .navigationTitle("Apple Store")
         }
+       
     }
 }

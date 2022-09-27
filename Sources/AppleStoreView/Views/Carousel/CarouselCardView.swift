@@ -17,6 +17,7 @@ struct CarouselCardView: AppStoreViewProtocol {
     let isLightColor: Bool
     
     @State var tap = false
+    @State private var isShowingDetailView = false
     
     init(carouselCard: CarouselCard, onFetchStoreList: @escaping OnFetchStoreList) {
         self.carouselCard = carouselCard
@@ -28,6 +29,8 @@ struct CarouselCardView: AppStoreViewProtocol {
     
     var body: some View {
         VStack(alignment: .center) {
+            NavigationLink(destination: AppleStoreView(link: carouselCard.link, onFetchStoreList: onFetchStoreList).navigationTitle(carouselCard.title), isActive: $isShowingDetailView) { EmptyView() }
+            
             VStack(alignment: .leading) {
                 if let label = carouselCard.label {
                     Text(label)
@@ -79,6 +82,7 @@ struct CarouselCardView: AppStoreViewProtocol {
         .animation(.spring(response: 0.4, dampingFraction: 0.6))
         .onTapGesture {
             tap = true
+            isShowingDetailView = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 tap = false
             }
@@ -89,8 +93,10 @@ struct CarouselCardView: AppStoreViewProtocol {
 @available(iOS 15.0, *)
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        CarouselCardView(carouselCard: carouselCard1){ _, _ in
-            
+        NavigationView {
+            CarouselCardView(carouselCard: carouselCard1){ _, onDone in
+                onDone(appleStoreList)
+            }
         }
     }
 }

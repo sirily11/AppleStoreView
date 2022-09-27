@@ -27,6 +27,7 @@ public struct CarouselCard: Codable, Identifiable {
     public var backgroundImage: String
     public var backgroundColor: String
     public var carouselAction: CarouselCardAction?
+    public var link: String
     
 }
 

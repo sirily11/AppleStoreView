@@ -8,11 +8,13 @@
 import SwiftUI
 import Kingfisher
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct VerticalListItemView: AppStoreViewProtocol {
     let onFetchStoreList: OnFetchStoreList
     
     let item: VerticalListItem
+    
+    @State var isShowingDetailView = false
     
     init(item: VerticalListItem, onFetchStoreList: @escaping OnFetchStoreList) {
         self.onFetchStoreList = onFetchStoreList
@@ -21,6 +23,8 @@ struct VerticalListItemView: AppStoreViewProtocol {
     
     var body: some View {
         VStack {
+            NavigationLink(destination: AppleStoreView(link: item.link, onFetchStoreList: onFetchStoreList).navigationTitle(item.title), isActive: $isShowingDetailView) { EmptyView() }
+            
             KFImage(URL(string: item.image))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -38,15 +42,20 @@ struct VerticalListItemView: AppStoreViewProtocol {
             
             Text(item.linkText)
                 .foregroundColor(.blue)
+                .onTapGesture {
+                    isShowingDetailView = true
+                }
         }
     }
 }
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct VerticalListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalListItemView(item: verticalListData1){_, _ in
-            
+        NavigationView {
+            VerticalListItemView(item: verticalListData1){_, onDone in
+                onDone(appleStoreList)
+            }
         }
     }
 }

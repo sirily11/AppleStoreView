@@ -15,6 +15,8 @@ struct VerticalImageView: AppStoreViewProtocol {
     let isLightColor: Bool
     let onFetchStoreList: OnFetchStoreList
     
+    @State var isShowingDetailView = false
+    
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
     var textColor: Color? {
@@ -42,6 +44,8 @@ struct VerticalImageView: AppStoreViewProtocol {
     
     var body: some View {
         VStack(alignment: .leading) {
+            NavigationLink(destination: AppleStoreView(link: image.link, onFetchStoreList: onFetchStoreList).navigationTitle(image.title), isActive: $isShowingDetailView) { EmptyView() }
+            
             HStack {
                 Text(image.title)
                     .foregroundColor(textColor)
@@ -58,6 +62,9 @@ struct VerticalImageView: AppStoreViewProtocol {
             HStack {
                 Text(image.linkTitle)
                     .foregroundColor(.blue)
+                    .onTapGesture {
+                        isShowingDetailView = true
+                    }
             }
             .padding([.horizontal])
             Spacer()
@@ -78,11 +85,15 @@ struct VerticalImageView: AppStoreViewProtocol {
 @available(iOS 15.0, *)
 struct VerticalImageView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalImageView(image: verticalImageData1) { _, _ in
-            
+        NavigationView {
+            VerticalImageView(image: verticalImageData1) { _, onDone in
+                onDone(appleStoreList)
+            }
         }
-        VerticalImageView(image: verticalImageData2){ _, _ in 
-            
+        NavigationView {
+            VerticalImageView(image: verticalImageData2){ _, onDone in
+                onDone(appleStoreList)
+            }
         }
     }
 }

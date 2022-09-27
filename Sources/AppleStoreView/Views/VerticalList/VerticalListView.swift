@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct VerticalListView: AppStoreViewProtocol {
     let items: [VerticalListItem]
     let onFetchStoreList: OnFetchStoreList
@@ -31,7 +31,7 @@ struct VerticalListView: AppStoreViewProtocol {
     }
 }
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct VerticalListView_Previews: PreviewProvider {
     static var previews: some View {
         VerticalListView(items: [verticalListData1, verticalListData2]){ _, _ in }
