@@ -8,15 +8,21 @@
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct VerticalListView: View {
+struct VerticalListView: AppStoreViewProtocol {
     let items: [VerticalListItem]
+    let onFetchStoreList: OnFetchStoreList
+    
+    init(items: [VerticalListItem], onFetchStoreList: @escaping OnFetchStoreList) {
+        self.items = items
+        self.onFetchStoreList = onFetchStoreList
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(items) { item in
                 HStack {
                     Spacer()
-                    VerticalListItemView(item: item)
+                    VerticalListItemView(item: item, onFetchStoreList: onFetchStoreList)
                     Spacer()
                 }
                 .padding([.vertical], 40)
@@ -28,6 +34,6 @@ struct VerticalListView: View {
 @available(iOS 14.0, *)
 struct VerticalListView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalListView(items: [verticalListData1, verticalListData2])
+        VerticalListView(items: [verticalListData1, verticalListData2]){ _, _ in }
     }
 }

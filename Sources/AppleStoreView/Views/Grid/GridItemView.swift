@@ -9,8 +9,14 @@ import SwiftUI
 import Kingfisher
 
 @available(iOS 14.0, *)
-struct GridItemView: View {
+struct GridItemView: AppStoreViewProtocol {
     let item: GridItem
+    let onFetchStoreList: OnFetchStoreList
+    
+    init(item: GridItem, onFetchStoreList: @escaping OnFetchStoreList) {
+        self.item = item
+        self.onFetchStoreList = onFetchStoreList
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -41,6 +47,8 @@ struct GridItemView: View {
 @available(iOS 14.0, *)
 struct GridItemView_Previews: PreviewProvider {
     static var previews: some View {
-        GridItemView(item: gridItemData1)
+        GridItemView(item: gridItemData1){ _, _ in
+            
+        }
     }
 }

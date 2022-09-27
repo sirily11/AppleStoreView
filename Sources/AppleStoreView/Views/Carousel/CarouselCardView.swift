@@ -9,17 +9,20 @@ import SwiftUI
 import Kingfisher
 
 @available(iOS 15.0, *)
-struct CarouselCardView: View {
+struct CarouselCardView: AppStoreViewProtocol {
+    let onFetchStoreList: OnFetchStoreList
+    
     let carouselCard: CarouselCard
     let backgroundUIColor: UIColor
     let isLightColor: Bool
     
     @State var tap = false
     
-    init(carouselCard: CarouselCard) {
+    init(carouselCard: CarouselCard, onFetchStoreList: @escaping OnFetchStoreList) {
         self.carouselCard = carouselCard
         self.backgroundUIColor = UIColor(hexString: carouselCard.backgroundColor)
         self.isLightColor = backgroundUIColor.isLight() ?? false
+        self.onFetchStoreList = onFetchStoreList
     }
     
     
@@ -86,6 +89,8 @@ struct CarouselCardView: View {
 @available(iOS 15.0, *)
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        CarouselCardView(carouselCard: carouselCard1)
+        CarouselCardView(carouselCard: carouselCard1){ _, _ in
+            
+        }
     }
 }

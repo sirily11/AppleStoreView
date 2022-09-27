@@ -9,10 +9,11 @@ import SwiftUI
 import Kingfisher
 
 @available(iOS 15.0, *)
-struct VerticalImageView: View {
+struct VerticalImageView: AppStoreViewProtocol {
     let image: VerticalImageItem
     let backgroundUIColor: UIColor?
     let isLightColor: Bool
+    let onFetchStoreList: OnFetchStoreList
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     
@@ -27,8 +28,9 @@ struct VerticalImageView: View {
         return nil
     }
     
-    init(image: VerticalImageItem) {
+    init(image: VerticalImageItem, onFetchStoreList: @escaping OnFetchStoreList) {
         self.image = image
+        self.onFetchStoreList = onFetchStoreList
         if let backgroundUIColor = image.backgroundColor {
             self.backgroundUIColor = UIColor(hexString: backgroundUIColor)
             self.isLightColor = self.backgroundUIColor?.isLight() ?? false
@@ -76,7 +78,11 @@ struct VerticalImageView: View {
 @available(iOS 15.0, *)
 struct VerticalImageView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalImageView(image: verticalImageData1)
-        VerticalImageView(image: verticalImageData2)
+        VerticalImageView(image: verticalImageData1) { _, _ in
+            
+        }
+        VerticalImageView(image: verticalImageData2){ _, _ in 
+            
+        }
     }
 }

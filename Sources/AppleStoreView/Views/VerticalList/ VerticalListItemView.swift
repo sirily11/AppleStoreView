@@ -9,8 +9,15 @@ import SwiftUI
 import Kingfisher
 
 @available(iOS 14.0, *)
-struct VerticalListItemView: View {
+struct VerticalListItemView: AppStoreViewProtocol {
+    let onFetchStoreList: OnFetchStoreList
+    
     let item: VerticalListItem
+    
+    init(item: VerticalListItem, onFetchStoreList: @escaping OnFetchStoreList) {
+        self.onFetchStoreList = onFetchStoreList
+        self.item = item
+    }
     
     var body: some View {
         VStack {
@@ -38,6 +45,8 @@ struct VerticalListItemView: View {
 @available(iOS 14.0, *)
 struct VerticalListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalListItemView(item: verticalListData1)
+        VerticalListItemView(item: verticalListData1){_, _ in
+            
+        }
     }
 }

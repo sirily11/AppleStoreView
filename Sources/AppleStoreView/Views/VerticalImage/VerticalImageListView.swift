@@ -8,13 +8,19 @@
 import SwiftUI
 
 @available(iOS 15.0, *)
-struct VerticalImageListView: View {
+struct VerticalImageListView: AppStoreViewProtocol {
     let items: [VerticalImageItem]
+    let onFetchStoreList: OnFetchStoreList
+    
+    init(items: [VerticalImageItem], onFetchStoreList: @escaping OnFetchStoreList) {
+        self.items = items
+        self.onFetchStoreList = onFetchStoreList
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(items) { item in
-                VerticalImageView(image: item)
+                VerticalImageView(image: item, onFetchStoreList: onFetchStoreList)
                     .edgesIgnoringSafeArea(.horizontal)
             }
         }
@@ -24,6 +30,6 @@ struct VerticalImageListView: View {
 @available(iOS 15.0, *)
 struct VerticalImageListView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalImageListView(items: [verticalImageData1])
+        VerticalImageListView(items: [verticalImageData1]){ _,  _ in}
     }
 }
