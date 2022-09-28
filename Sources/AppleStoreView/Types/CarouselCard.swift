@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CarouselCard: Codable, Identifiable {
-    public var id = UUID()
+    public var id: Int
     /**
      Carousel card's label
      */

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct VerticalListItem: Codable, Identifiable {
-    public var id = UUID()
+    public var id: Int
     public var image: String
     public var label: String?
     public var title: String

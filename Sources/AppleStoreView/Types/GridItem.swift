@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GridItem: Codable, Identifiable {
-    public var id = UUID()
+    public var id: Int
     public var title: String
     public var image: String
     public var link: String
