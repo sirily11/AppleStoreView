@@ -19,7 +19,7 @@ public struct AppleStoreView: AppStoreViewProtocol {
     let link: String
     let onFetchStoreList: OnFetchStoreList
 
-    init(link: String, onFetchStoreList: @escaping OnFetchStoreList) {
+    public init(link: String, onFetchStoreList: @escaping OnFetchStoreList) {
         self.link = link
         self.onFetchStoreList = onFetchStoreList
     }

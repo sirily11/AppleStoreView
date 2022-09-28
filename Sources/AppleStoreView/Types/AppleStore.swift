@@ -9,8 +9,8 @@ import Foundation
 import AnyCodable
 import SwiftUI
 
-typealias OnDone = ([AppleStoreList<AnyCodable>]) -> Void
-typealias OnFetchStoreList = (String, OnDone) -> Void
+public typealias OnDone = ([AppleStoreList<AnyCodable>]) -> Void
+public typealias OnFetchStoreList = (String, OnDone) -> Void
 
 protocol AppStoreViewProtocol: View {
     var onFetchStoreList: OnFetchStoreList {get}
