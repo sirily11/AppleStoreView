@@ -44,17 +44,18 @@ struct CarouselCardView: AppStoreViewProtocol {
                     .foregroundColor(isLightColor ? .black: .white)
                     .lineLimit(3)
                 Text(carouselCard.description)
-                    .font(.caption)
                     .foregroundColor(isLightColor ? .black: .white)
             }
             .padding()
             
+            Spacer()
+            
             KFImage(URL(string: carouselCard.backgroundImage))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .padding()
-            Spacer()
+                .padding([.top])
             if let action = carouselCard.carouselAction {
+                Spacer()
                 HStack {
                     Text(action.title)
                         .font(.caption)
@@ -95,6 +96,11 @@ struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             CarouselCardView(carouselCard: carouselCard1){ _, onDone in
+                onDone(appleStoreList)
+            }
+        }
+        NavigationView {
+            CarouselCardView(carouselCard: carouselCard3){ _, onDone in
                 onDone(appleStoreList)
             }
         }
