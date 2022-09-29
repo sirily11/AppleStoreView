@@ -54,11 +54,13 @@ struct VerticalImageView: AppStoreViewProtocol {
                 Spacer()
             }
             .padding([.horizontal, .top])
-            HStack {
-                Text(image.description)
-                    .foregroundColor(textColor)
+            if let description = image.description {
+                HStack {
+                    Text(description)
+                        .foregroundColor(textColor)
+                }
+                .padding([.horizontal])
             }
-            .padding([.horizontal])
             HStack {
                 Text(image.linkTitle)
                     .foregroundColor(.blue)
@@ -73,7 +75,6 @@ struct VerticalImageView: AppStoreViewProtocol {
                 KFImage(URL(string: image.image))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 150)
                 Spacer()
             }
         }

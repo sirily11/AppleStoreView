@@ -19,9 +19,13 @@ struct VerticalImageListView: AppStoreViewProtocol {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ForEach(items) { item in
-                VerticalImageView(image: item, onFetchStoreList: onFetchStoreList)
+            ForEach(0..<items.count, id: \.self) { index in
+                VerticalImageView(image: items[index], onFetchStoreList: onFetchStoreList)
                     .edgesIgnoringSafeArea(.horizontal)
+                
+                if index < items.count - 1 {
+                    Divider()
+                }
             }
         }
     }
@@ -30,6 +34,6 @@ struct VerticalImageListView: AppStoreViewProtocol {
 @available(iOS 15.0, *)
 struct VerticalImageListView_Previews: PreviewProvider {
     static var previews: some View {
-        VerticalImageListView(items: [verticalImageData1]){ _,  _ in}
+        VerticalImageListView(items: [verticalImageData1, verticalImageData2]){ _,  _ in}
     }
 }
