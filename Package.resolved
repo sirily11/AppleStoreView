@@ -26,6 +26,15 @@
         "branch" : "master",
         "revision" : "26a5aee988318f1a57adc9b9c3e676ce318630a8"
       }
+    },
+    {
+      "identity" : "webviewkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/WebViewKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "15d7422c883f15a0dafc8291e0bc8f4f4ae9070f"
+      }
     }
   ],
   "version" : 2

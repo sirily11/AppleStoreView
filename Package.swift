@@ -17,7 +17,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/onevcat/Kingfisher", branch: "master"),
         .package(url: "https://github.com/JWAutumn/ACarousel", from: "0.2.0"),
-        .package(url: "https://github.com/Flight-School/AnyCodable", branch: "master")
+        .package(url: "https://github.com/Flight-School/AnyCodable", branch: "master"),
+        .package(url: "https://github.com/danielsaidi/WebViewKit", branch: "main")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -27,8 +28,8 @@ let package = Package(
             dependencies: [
                 .product(name: "Kingfisher", package: "Kingfisher"),
                 .product(name: "ACarousel", package: "ACarousel"),
-                .product(name: "AnyCodable", package: "AnyCodable")
-            
+                .product(name: "AnyCodable", package: "AnyCodable"),
+                .product(name: "WebViewKit", package: "WebViewKit")
             ]),
         .testTarget(
             name: "AppleStoreViewTests",

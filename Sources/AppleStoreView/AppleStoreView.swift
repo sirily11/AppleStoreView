@@ -18,31 +18,40 @@ public struct AppleStoreView: AppStoreViewProtocol {
     
     let link: String
     let onFetchStoreList: OnFetchStoreList
-
+    
     public init(link: String, onFetchStoreList: @escaping OnFetchStoreList) {
         self.link = link
         self.onFetchStoreList = onFetchStoreList
     }
     
     public var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                ForEach(storeList){list in
-                    if let title = list.title {
-                        Text(title)
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .padding()
+        Group {
+            if let first = storeList.first, first.type == .webview, let firstItem = first.items.first {
+                // if view is webview
+                let encoded = try! JSONEncoder().encode(firstItem.content)
+                let item = try! JSONDecoder().decode(WebViewItem.self, from: encoded)
+                WebViewItemView(item: item)
+            } else {
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        ForEach(storeList){list in
+                            if let title = list.title {
+                                Text(title)
+                                    .fontWeight(.bold)
+                                    .font(.title)
+                                    .padding()
+                            }
+                            renderView(list: list)
+                            
+                            Divider()
+                                .padding([.vertical], 20)
+                        }
                     }
-                    renderView(list: list)
-                    
-                    Divider()
-                        .padding([.vertical], 20)
+                }
+                .onAppear{
+                    fetch()
                 }
             }
-        }
-        .onAppear{
-           fetch()
         }
     }
     
@@ -100,6 +109,6 @@ struct AppleStoreView_Previews: PreviewProvider {
             }
             .navigationTitle("Apple Store")
         }
-       
+        
     }
 }
